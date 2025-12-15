@@ -57,9 +57,18 @@ class CatalanBench_Cabreu(DownstreamTask):
     def generate_ngrams(self):
         for idx, line in enumerate(self._dataset):
             try:
+                text = re.sub(r" +", " ", line["title"])
+                self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
                 text = re.sub(r" +", " ", line["subtitle"])
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
                 text = re.sub(r" +", " ", line["content"])
+                self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
+                for _, summaries in line["summaries"].items():
+                    for _, summary in summaries.items():
+                        text = re.sub(r" +", " ", summary)
+                        self._update_ngrams(
+                            text, self._min_ngram_size, self._max_ngram_size
+                        )
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
             except Exception:
                 logging.exception(f"Error processing line {idx}")
@@ -184,6 +193,8 @@ class CatalanBench_MGSM(DownstreamTask):
         for idx, line in enumerate(self._dataset):
             try:
                 text = line["question"]
+                self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
+                text = line["answer"]
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
             except Exception:
                 logging.exception(f"Error processing line {idx}")

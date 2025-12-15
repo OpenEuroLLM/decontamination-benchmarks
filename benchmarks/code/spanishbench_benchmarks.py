@@ -116,10 +116,12 @@ class SpanishBench_XLSUM(DownstreamTask):
         # https://github.com/EleutherAI/lm-evaluation-harness/blob/main/lm_eval/tasks/spanish_bench/utils.py#L38
         for idx, line in enumerate(self._dataset):
             try:
+                text = re.sub(r" +", " ", line["title"])
+                self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
                 text = re.sub(r" +", " ", line["text"])
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
-                summary = re.sub(r" +", " ", line["summary"])
-                self._update_ngrams(summary, self._min_ngram_size, self._max_ngram_size)
+                text = re.sub(r" +", " ", line["summary"])
+                self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
             except Exception:
                 logging.exception(f"Error processing line {idx}")
         return self.ngrams

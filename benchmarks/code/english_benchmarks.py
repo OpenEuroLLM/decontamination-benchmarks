@@ -277,6 +277,8 @@ class GSM8K(DownstreamTask):
             try:
                 text = line["question"].strip()
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
+                text = line["answer"].strip()
+                self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
             except Exception:
                 logging.exception(f"Error processing line {idx}")
         return self.ngrams
@@ -302,6 +304,12 @@ class MBPP(DownstreamTask):
             try:
                 text = line["text"]
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
+                text = line["code"]
+                self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
+                for test in line["test_list"]:
+                    self._update_ngrams(
+                        test, self._min_ngram_size, self._max_ngram_size
+                    )
             except Exception:
                 logging.exception(f"Error processing line {idx}")
         return self.ngrams
@@ -324,6 +332,10 @@ class HumanEval(DownstreamTask):
         for idx, line in enumerate(self._dataset):
             try:
                 text = line["prompt"]
+                self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
+                text = line["canonical_solution"]
+                self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
+                text = line["test"]
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
             except Exception:
                 logging.exception(f"Error processing line {idx}")
@@ -455,6 +467,10 @@ class Hendrycks_MATH(DownstreamTask):
                     self._update_ngrams(
                         text, self._min_ngram_size, self._max_ngram_size
                     )
+                    text = line["solution"]
+                    self._update_ngrams(
+                        text, self._min_ngram_size, self._max_ngram_size
+                    )
                 except Exception:
                     logging.exception(f"Error processing line {idx}")
         return self.ngrams
@@ -499,31 +515,6 @@ class AlpacaEval(DownstreamTask):
             df = pl.read_csv(self._file_path, has_header=True)
         except Exception:
             logging.exception(f"Error processing documents")
-
-        for idx, text in enumerate(df["instruction"]):
-            try:
-                self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
-            except Exception:
-                logging.exception(f"Error processing line {idx}")
-        return self.ngrams
-
-
-class ArenaHard(DownstreamTask):
-    def __init__(self, file_path, min_ngram_size=8, max_ngram_size=13):
-        super().__init__()
-        self._task_name = "arenahard"
-        self._min_ngram_size = min_ngram_size
-        self._max_ngram_size = max_ngram_size
-        self._file_path = file_path
-        if self._file_path is None:
-            raise Exception("Must provide path to data in CSV format")
-
-    def generate_ngrams(self):
-        df = None
-        try:
-            df = pl.read_csv(self._file_path, has_header=True)
-        except Exception:
-            logging.error(f"Error loading file {self._file_path}")
 
         for idx, text in enumerate(df["instruction"]):
             try:

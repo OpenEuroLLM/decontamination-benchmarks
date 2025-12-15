@@ -99,7 +99,7 @@ class BasqueBench_EusProficiency(DownstreamTask):
             try:
                 text = line["question"]
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
-                # Add the solution as well
+                # Fill in the blanks
                 if "....." in line["question"]:
                     solution = line["candidates"][line["answer"] - 1]
                     if " · " in solution:
@@ -289,7 +289,7 @@ class BasqueBench_QNLI(DownstreamTask):
     def generate_ngrams(self):
         for idx, line in enumerate(self._dataset):
             try:
-                text = line["question"] + " \n " + line["sentence"]
+                text = line["question"] + " " + line["sentence"]
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
             except Exception:
                 logging.exception(f"Error processing line {idx}")
