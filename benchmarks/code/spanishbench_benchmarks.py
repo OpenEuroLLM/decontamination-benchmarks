@@ -113,7 +113,7 @@ class SpanishBench_XLSUM(DownstreamTask):
         self._dataset = load_dataset("csebuetnlp/xlsum", "spanish", split=split_type)
 
     def generate_ngrams(self):
-        # https://github.com/EleutherAI/lm-evaluation-harness/blob/main/lm_eval/tasks/spanish_bench/utils.py#L38
+        # https://github.com/EleutherAI/lm-evaluation-harness/blob/main/lm_eval/tasks/spanish_bench/utils.py
         for idx, line in enumerate(self._dataset):
             try:
                 text = re.sub(r" +", " ", line["title"])

@@ -21,6 +21,9 @@ tasks:
   - name: benchmarks.code.multilingual_benchmarks.XWinograd
     params: {lang: fr, split_type: test}
 
+  - name: benchmarks.code.multilingual_benchmarks.XWinogradNoBlanks
+    params: {lang: fr, split_type: test}
+
   - name: benchmarks.code.multilingual_benchmarks.MGSM
     params: {lang: fr, split_type: test}
 

@@ -306,13 +306,36 @@ class MBPP(DownstreamTask):
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
                 text = line["code"]
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
-                for test in line["test_list"]:
-                    self._update_ngrams(
-                        test, self._min_ngram_size, self._max_ngram_size
-                    )
             except Exception:
                 logging.exception(f"Error processing line {idx}")
         return self.ngrams
+
+class MBPP_Plus(DownstreamTask):
+    def __init__(
+        self,
+        min_ngram_size=8,
+        max_ngram_size=13,
+        split_type=None,
+    ):
+        super().__init__()
+        self._task_name = "mbpp"
+        self._min_ngram_size = min_ngram_size
+        self._max_ngram_size = max_ngram_size
+        self._dataset = load_dataset(
+            "evalplus/mbppplus", split=split_type
+        )
+
+    def generate_ngrams(self):
+        for idx, line in enumerate(self._dataset):
+            try:
+                text = line["prompt"]
+                self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
+                text = line["code"]
+                self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
+            except Exception:
+                logging.exception(f"Error processing line {idx}")
+        return self.ngrams
+
 
 
 class HumanEval(DownstreamTask):
@@ -335,7 +358,29 @@ class HumanEval(DownstreamTask):
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
                 text = line["canonical_solution"]
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
-                text = line["test"]
+            except Exception:
+                logging.exception(f"Error processing line {idx}")
+        return self.ngrams
+
+class HumanEval_Plus(DownstreamTask):
+    def __init__(
+        self,
+        min_ngram_size=8,
+        max_ngram_size=13,
+        split_type=None,
+    ):
+        super().__init__()
+        self._task_name = "humaneval"
+        self._min_ngram_size = min_ngram_size
+        self._max_ngram_size = max_ngram_size
+        self._dataset = load_dataset("evalplus/humanevalplus", split=split_type)
+
+    def generate_ngrams(self):
+        for idx, line in enumerate(self._dataset):
+            try:
+                text = line["prompt"]
+                self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
+                text = line["canonical_solution"]
                 self._update_ngrams(text, self._min_ngram_size, self._max_ngram_size)
             except Exception:
                 logging.exception(f"Error processing line {idx}")

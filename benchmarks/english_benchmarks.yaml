@@ -35,7 +35,13 @@ tasks:
   - name: benchmarks.code.english_benchmarks.MBPP
     params: {split_type: test}
 
+  - name: benchmarks.code.english_benchmarks.MBPP_Plus
+    params: {split_type: test}
+
   - name: benchmarks.code.english_benchmarks.HumanEval
+    params: {split_type: test}
+
+  - name: benchmarks.code.english_benchmarks.HumanEval_Plus
     params: {split_type: test}
 
   - name: benchmarks.code.multilingual_benchmarks.MultiBlimp
@@ -51,6 +57,9 @@ tasks:
     params: {lang: en, split_type: eval}
 
   - name: benchmarks.code.multilingual_benchmarks.XWinograd
+    params: {lang: en, split_type: test}
+
+  - name: benchmarks.code.multilingual_benchmarks.XWinogradNoBlanks
     params: {lang: en, split_type: test}
 
   - name: benchmarks.code.multilingual_benchmarks.Flores200
