@@ -1,5 +1,7 @@
 This repository contains the benchmarks and config files used to make decontamination for the first cycle of pretraining OpenEuroLLM datasets. 
 
+#Benchmarks and Languages
+
 It covers the following benchmarks which contain one or more of the [36 languages](https://github.com/OpenEuroLLM/training-data-catalogue/blob/main/languages) initially targetted by OpenEuroLLM: 
 
 | Task                   | Category               | Framework                | Link                                                                                        | #Languages |
@@ -49,15 +51,23 @@ It covers the following benchmarks which contain one or more of the [36 language
 | PAWS-X                 | TODO                   | Harness                  | https://github.com/EleutherAI/lm-evaluation-harness/blob/main/lm_eval/tasks/paws-x          | 7          |
 | XNLI                   | TODO                   | Harness                  | https://github.com/EleutherAI/lm-evaluation-harness/blob/main/lm_eval/tasks/xnli            | 15         |
 
+#What is in this repo
+
 The repo is organized by languages and specifies which benchmarks and splits where used for each of them. 
 
 The .yaml files inside benchmarks/ contain the benchmarks used and the split. 
 
 The split chosen is the one specified for evaluation in lm-evaluation-harness when applicable (the one specified in test_split, and if not specified, the one in validation_split)
 
+
 Then the benchmarks/code/ folder contains the code for loading each benchmark.
 
 Finally, the benchmarks/data/ folder contains some specific benchmarks that are not included in the llm-eval-harness framework. 
+
+#First cycle decontamination report
+
+The decontamination approach and results from the first cycle are described in this [report](https://drive.google.com/file/d/1P3ctGNHGRyXv8QfV9nMl-k2SFX8S9GnJ/view?usp=drive_link).
+
 
 
 
