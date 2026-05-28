@@ -1,6 +1,8 @@
+# Decontamination benchmarks
+
 This repository contains the benchmarks and config files used to make decontamination for the first cycle of pretraining OpenEuroLLM datasets. 
 
-#Benchmarks and Languages
+# Benchmarks and Languages
 
 It covers the following benchmarks which contain one or more of the [36 languages](https://github.com/OpenEuroLLM/training-data-catalogue/blob/main/languages) initially targetted by OpenEuroLLM: 
 
