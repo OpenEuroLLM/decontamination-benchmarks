@@ -1,6 +1,6 @@
 This repository contains the benchmarks and config files used to make decontamination for the first cycle of pretraining OpenEuroLLM datasets. 
 
-It covers the following benchmarks which contain one or more of the 36 languages initially targetted by OpenEuroLLM: 
+It covers the following benchmarks which contain one or more of the [36 languages](https://github.com/OpenEuroLLM/training-data-catalogue/blob/main/languages) initially targetted by OpenEuroLLM: 
 
 | Task                   | Category               | Framework                | Link                                                                                        | #Languages |
 |------------------------|------------------------|--------------------------|---------------------------------------------------------------------------------------------|------------|
@@ -57,6 +57,7 @@ The split chosen is the one specified for evaluation in lm-evaluation-harness wh
 
 Then the benchmarks/code/ folder contains the code for loading each benchmark.
 
+Finally, the benchmarks/data/ folder contains some specific benchmarks that are not included in the llm-eval-harness framework. 
 
 
 
