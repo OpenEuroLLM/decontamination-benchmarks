@@ -70,7 +70,7 @@ It covers the following benchmarks which contain one or more of the [36 language
 
 # What did we do with these benchmarks? 
 
-We used them to decontaminate OpenEuroLLM pretraining datasets. The approach and results from the first cycle are described in this [report](https://drive.google.com/file/d/1P3ctGNHGRyXv8QfV9nMl-k2SFX8S9GnJ/view?usp=drive_link).
+We used them to decontaminate OpenEuroLLM pretraining datasets. The approach and results from the first cycle are described in this [report](Decont_Report_1st-cycle-OELLM.pdf).
 
 
 
